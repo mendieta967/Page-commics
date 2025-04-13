@@ -1,0 +1,139 @@
+/* General */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+/* Fondo y centrado */
+.login-container {
+    width: 100%;
+    height: 100vh;
+    background-image: url("/fondo.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor del login */
+.conteiner-login {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    border: 1px solid rgba(254, 3, 3, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+    padding: 40px 30px;
+    color: #f30505;
+    font-weight: 700;
+    width: 100%;
+    max-width: 500px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.conteiner-login:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 40px rgba(255, 0, 0, 0.4);
+}
+
+/*
+.conteiner-login::after {
+    background: inherit;
+    position: absolute;
+    content: "";
+    filter: blur(25px) saturate(1.5);
+    width: 100%;
+    height: 100%;
+    scale: 1.05;
+    z-index: -1;
+}Inputs */
+
+input.form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: solid 1px #f30505;
+    border-radius: 10px;
+    color: #fff;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+input.form-control::placeholder {
+    color: white;
+}
+
+input.form-control:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    outline: none;
+    box-shadow: none;
+}
+
+/* Texto de error */
+.text-danger {
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+h5 {
+    text-align: center;
+    font-size: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+button.btn {
+    border-radius: 10px;
+    padding: 10px 0;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+button.btn:hover {
+    transform: scale(1.03);
+}
+
+/* Botón secundario (Login) */
+.btn-secondary {
+    background-color: #343a40;
+    border: none;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background-color: #f30505;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Botón primario (Register) */
+.btn-primary {
+    background-color: #f30505;
+    border: 1px solid #f30505;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #c20404;
+    border-color: #c20404;
+    transform: scale(1.05);
+}
+
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-container {
+        background-image: url("/pantallaChica.jpeg");
+    }
+
+    .conteiner-login {
+        padding: 50px 20px;
+    }
+}
+
+@media (max-width: 980px) {
+    .login-container {
+        background-image: url("/pantallaChica.jpeg");
+    }
+
+    .conteiner-login {
+        padding: 50px 20px;
+    }
+}

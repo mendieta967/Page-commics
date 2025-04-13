@@ -1,0 +1,274 @@
+.container-landing {
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    /* Asegura que el contenido cubra toda la altura */
+}
+
+.landing-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    gap: 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+
+}
+
+.landing-text {
+    flex: 1;
+    max-width: 600px;
+}
+
+.landing-text h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.landing-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #4a4a4a;
+}
+
+.section-Galeria {
+    display: flex;
+    width: 600px;
+    height: 430px;
+    flex: 1;
+    min-width: 300px;
+}
+
+.section-Galeria img {
+    width: 0;
+    flex-grow: 1;
+    object-fit: cover;
+    opacity: .8;
+    transition: .5s ease;
+}
+
+.section-Galeria img:hover {
+    cursor: pointer;
+    width: 300px;
+    opacity: 1;
+    filter: contrast(120%);
+}
+
+
+.landing-text {
+    flex: 1;
+    max-width: 600px;
+    min-width: 280px;
+}
+
+.landing-text h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #212529;
+}
+
+.landing-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #212529;
+}
+
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.landing-text,
+.section-Galeria,
+.about-section {
+    animation: fadeInUp 1s ease-in-out;
+}
+
+
+.about-section {
+    padding: 60px 20px;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+}
+
+.about-content {
+    max-width: 800px;
+    text-align: center;
+}
+
+.about-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #343a40;
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.cta-buttons p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.btn-login,
+.btn-register {
+    padding: 0.75rem 1.5rem;
+    margin: 0 0.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-login {
+    background-color: #343a40;
+    color: white;
+}
+
+.btn-register {
+    background-color: #f30505;
+    border: none;
+    color: #ffffff;
+}
+
+.btn-login:hover {
+    background-color: #f30505;
+}
+
+.btn-register:hover {
+    background-color: #343a40;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+    .landing-section {
+        padding: 2rem 1.5rem;
+        gap: 3rem;
+    }
+
+    .landing-text h1 {
+        font-size: 3rem;
+    }
+
+    .section-Galeria {
+        width: 500px;
+        height: 380px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .landing-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .landing-text {
+        max-width: 100%;
+    }
+
+    .section-Galeria {
+        width: 100%;
+        height: 350px;
+    }
+
+    .about-content h2 {
+        font-size: 2.2rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .landing-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .section-Galeria {
+        height: 300px;
+    }
+
+    .about-section {
+        padding: 40px 15px;
+    }
+
+    .about-content h2 {
+        font-size: 2rem;
+    }
+
+    .btn-login,
+    .btn-register {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .landing-section {
+        padding: 1.5rem 1rem;
+    }
+
+    .landing-text h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .landing-text p {
+        font-size: 1rem;
+    }
+
+    .section-Galeria {
+        height: 250px;
+    }
+
+    .section-Galeria img:hover {
+        width: 200px;
+    }
+
+    .about-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .about-content p {
+        font-size: 1rem;
+    }
+
+    .cta-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-login,
+    .btn-register {
+        width: 100%;
+        max-width: 250px;
+        margin: 0.25rem 0;
+    }
+}

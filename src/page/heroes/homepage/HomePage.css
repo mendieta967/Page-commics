@@ -1,0 +1,38 @@
+.container-home {
+    padding: 2rem;
+    max-width: 100%;
+}
+
+.grid-heroes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.contendor-card {
+    width: 100%;
+    height: 500px;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+@media (max-width: 900px) {
+    .grid-heroes {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-heroes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 460px) {
+    .grid-heroes {
+        grid-template-columns: 1fr;
+    }
+}

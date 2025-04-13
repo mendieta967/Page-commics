@@ -1,0 +1,73 @@
+.card {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-color: #fff;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card-img {
+    height: 60%;
+    overflow: hidden;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    height: 35%;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    overflow: hidden;
+}
+
+.card-title {
+    font-size: 25px;
+    text-shadow: 2px 2px 4px rgba(251, 2, 2, 0.7);
+}
+
+.card-footer {
+    text-align: center;
+    height: 10%;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+}
+
+.card-footer .btn {
+    background: #f30505;
+    border: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.card-footer .btn:hover {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.input-search {
+    height: 36px;
+    /* O lo que prefieras */
+    padding: 4px 10px;
+    font-size: 0.9rem;
+}
+
+.btn-search {
+    height: 36px;
+    /* igual que el input */
+    padding: 4px 12px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}

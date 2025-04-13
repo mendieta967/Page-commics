@@ -1,0 +1,260 @@
+.navbarpage {
+    background-color: #212529;
+}
+
+.my-btn-page {
+    border-radius: 10px;
+    padding: 10px 0;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    outline: none;
+    box-shadow: none;
+}
+
+.my-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Botón Login */
+.my-btn-secondary {
+    outline: none;
+    background-color: #f30505;
+    border: none;
+    color: #ffffff;
+}
+
+.my-btn-secondary:hover {
+    transform: scale(1.05);
+}
+
+/* Botón Register */
+.my-btn-primary {
+    outline: none;
+    background-color: #343a40;
+    border: none;
+    color: white;
+}
+
+.my-btn:focus,
+.my-btn-primary:focus,
+.my-btn-secondary:focus,
+.my-btn:active:focus,
+.my-btn-primary:active:focus,
+.my-btn-secondary:active:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(243, 5, 5, 0.4)
+}
+
+
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .container-fluid img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .my-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        min-width: 100px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container-fluid-page {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .container-fluid-page img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .d-flex.gap-2 {
+        width: 100%;
+        justify-content: center;
+        gap: 0.5rem !important;
+    }
+
+    .my-btn-page {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+/*Styles NavbarPrivado*/
+/* Navbar base */
+.navbar {
+    background-color: #222;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Layout general del contenedor */
+.container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+}
+
+/* Logo */
+.navbar img {
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-right: 1rem;
+}
+
+.navbar img:hover {
+    transform: scale(1.05);
+}
+
+/* Marca / título */
+.navbar-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Enlaces */
+.nav-links {
+    margin-left: 0.75rem;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-item {
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: color 0.3s, transform 0.2s;
+    padding: 0.5rem 0.75rem;
+}
+
+.nav-item:hover {
+    transform: translateY(-2px);
+}
+
+/* Formulario de búsqueda */
+.form-navbar {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 150px;
+    max-width: 400px;
+}
+
+.search-form {
+    display: flex;
+    width: 100%;
+}
+
+.search-form input {
+    border-radius: 20px 0 0 20px;
+    border: none;
+    padding: 0.5rem 1rem;
+}
+
+.search-form-button {
+    border: 2px solid #c30000;
+    border-radius: 0 20px 20px 0;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    background-color: transparent;
+}
+
+.search-form button:hover {
+    background-color: #e9ecef;
+}
+
+/* Botón de búsqueda */
+.btn-search {
+    color: white;
+    border: none;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+}
+
+.btn-search:hover {
+    transform: scale(1.05);
+    background-color: #c30000;
+}
+
+/* Botones generales */
+.btn {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.5rem;
+    transition: transform 0.2s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
+.btn-danger {
+    border-radius: 50%;
+}
+
+/* Inputs */
+.form-control {
+    border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .navbar {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nav-links {
+        margin: 1rem 0;
+    }
+
+    .form-navbar {
+        margin: 1rem 0;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .navbar-brand {
+        display: flex;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .form-navbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .form-control {
+        width: 80%;
+    }
+}
