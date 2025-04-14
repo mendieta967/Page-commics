@@ -1,94 +1,141 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Menu, Search, Globe2, Palette, LogOut, X } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
-
 import "./NavBar.css";
 
 const LandingNavBar = () => {
-  const { handleLogaut } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
   const navigate = useNavigate();
 
+  // Helper Components
+  const NavLink = ({ children, isActive }) => (
+    <a href="#" className={`nav-link ${isActive ? "active" : ""}`}>
+      {children}
+    </a>
+  );
+
+  const MobileNavLink = ({ children }) => (
+    <a href="#" className="mobile-nav-link">
+      {children}
+    </a>
+  );
+
+  const ActionButton = ({ icon, onClick }) => (
+    <button onClick={onClick} className="action-button">
+      {icon}
+    </button>
+  );
+
   return (
-    <nav className="navbar px-4 py-2">
-      <div className="container-fluid d-flex align-items-center justify-content-between  flex-wrap">
-        <div className="navbar-brand  gap-3">
-          <img
-            src="/icono-perfil.jpg"
-            alt="icon"
-            className="rounded-circle"
-            width="80"
-            height="80"
-            onClick={() => navigate("/home")}
-          />
-          <div className="d-flex gap-3 nav-links">
-            <NavLink
-              className={({ isActive }) =>
-                `nav-item nav-link ${
-                  isActive ? "text-warning fw-bold" : "text-light"
-                }`
-              }
-              to="/marvel"
-            >
-              Marvel
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                `nav-item nav-link ${
-                  isActive ? "text-warning fw-bold" : "text-light"
-                }`
-              }
-              to="/dc"
-            >
-              DC
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                `nav-item nav-link ${
-                  isActive ? "text-warning fw-bold" : "text-light"
-                }`
-              }
-              to="/marvel"
-            >
-              favoritos
-            </NavLink>
+    <div className="container-navbar">
+      <nav className="navbar px-4 py-2">
+        <div className="navbar-container">
+          <div className="navbar-row">
+            <div className="navbar-brand">
+              <img
+                src="/public/icono-perfil.jpg"
+                alt="Profile"
+                className="rounded-circle"
+                width="100"
+                height="100"
+              />
+              {/* Desktop Navigation */}
+              <div className="desktop-nav">
+                <NavLink isActive>Home</NavLink>
+                <NavLink>Marvel</NavLink>
+                <NavLink>DC</NavLink>
+                <NavLink>Favorites</NavLink>
+              </div>
+            </div>
+
+            {/* Search Bar - Hidden on mobile */}
+            <div className="search-container">
+              <div className="search-wrapper">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="search-input"
+                />
+                <button className="search-button">
+                  <Search size={20} />
+                </button>
+              </div>
+            </div>
+
+            {/* Mobile Action Buttons */}
+            <div className="mobile-actions">
+              <ActionButton icon={<Globe2 size={20} />} />
+              <ActionButton icon={<Palette size={20} />} />
+              <ActionButton
+                icon={<Search size={20} />}
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+              />
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="menu-button"
+              >
+                <Menu size={24} />
+              </button>
+            </div>
+
+            {/* Desktop Action Buttons */}
+            <div className="desktop-actions">
+              <ActionButton icon={<Globe2 size={20} />} />
+              <ActionButton icon={<Palette size={20} />} />
+              <button className="logout-button" onClick={() => navigate("/")}>
+                <LogOut size={20} />
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div className="form-navbar">
-          <form className="d-flex" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button
-              className="search-form-button btn btn-danger d-flex align-items-center gap-2"
-              type="submit"
-            >
-              <FaSearch />
-            </button>
-          </form>
-        </div>
+          {/* Mobile Search Bar - Expandable */}
+          {isSearchOpen && (
+            <div className="mobile-search">
+              <div className="mobile-search-wrapper">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="mobile-search-input"
+                  autoFocus
+                />
+                <button
+                  onClick={() => setIsSearchOpen(false)}
+                  className="mobile-search-close"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+            </div>
+          )}
 
-        {/* Botones de acción */}
-        <div className="icon-navbar d-flex align-items-center justify-content-center gap-2">
-          <button className="btn btn-light">🌐</button>
-          <button className="btn btn-light">🎨</button>
-          <button
-            type="button"
-            className="btn btn-danger fw-bold d-flex align-items-center gap-2"
-            onClick={() => {
-              handleLogaut();
-              navigate("/");
-            }}
-          >
-            <FaSignOutAlt />
-          </button>
+          {/* Mobile menu */}
+          {isOpen && (
+            <div className="mobile-menu">
+              <div className="mobile-menu-content">
+                <MobileNavLink>Marvel</MobileNavLink>
+                <MobileNavLink>DC</MobileNavLink>
+                <MobileNavLink>Favorites</MobileNavLink>
+                {/* Mobile Action Button */}
+                <div className="mobile-logout">
+                  <button
+                    className="mobile-logout-button"
+                    onClick={() => navigate("/")}
+                  >
+                    <LogOut size={20} />
+                    <span>Logout</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 };
 
