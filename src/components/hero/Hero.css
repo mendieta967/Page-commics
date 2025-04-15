@@ -6,8 +6,9 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
     background-color: #fff;
+    transition: transform 0.3s ease;
+
 }
 
 .card:hover {
@@ -17,12 +18,15 @@
 .card-img {
     height: 60%;
     overflow: hidden;
+    object-fit: cover;
+    object-position: center;
 }
 
 .card-img img {
+    border-radius: 12px;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+
 }
 
 .card-body {
@@ -34,19 +38,35 @@
 
 .card-title {
     font-size: 25px;
-    text-shadow: 2px 2px 4px rgba(251, 2, 2, 0.7);
+    color: #f30505;
+}
+
+p {
+    color: #343a40;
+    font-weight: bold;
 }
 
 .card-footer {
-    text-align: center;
-    height: 10%;
-    padding: 0.5rem;
-    background-color: #f8f9fa;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 12px;
+    border-top: 1px solid #eee;
+    margin-top: auto;
+    background-color: #f9f9f9;
+    border-radius: 0 0 12px 12px;
 }
 
 .card-footer .btn {
-    background: #f30505;
+    padding: 6px 14px;
+    font-size: 0.875rem;
     border: none;
+    border-radius: 8px;
+    background: #f30505;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
     font-weight: bold;
     transition: background 0.3s ease;
 }
@@ -56,18 +76,25 @@
     color: #fff;
 }
 
-.input-search {
-    height: 36px;
-    /* O lo que prefieras */
-    padding: 4px 10px;
-    font-size: 0.9rem;
-}
 
-.btn-search {
+.btn-fav {
+    background-color: #343a40;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
     height: 36px;
-    /* igual que el input */
-    padding: 4px 12px;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-fav:hover {
+    background-color: #e8413a;
+    transform: scale(1.1);
 }

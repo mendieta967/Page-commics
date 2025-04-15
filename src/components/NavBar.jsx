@@ -1,9 +1,7 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate, Link } from "react-router-dom";
 import React, { useState } from "react";
 import { Menu, Search, Globe2, Palette, LogOut, X } from "lucide-react";
-import { useAuth } from "../context/AuthContext";
-import { FaSignOutAlt } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";
 import "./NavBar.css";
 
 const LandingNavBar = () => {
@@ -11,19 +9,12 @@ const LandingNavBar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const navigate = useNavigate();
+  const { handleLogaut } = useAuth();
 
-  // Helper Components
-  const NavLink = ({ children, isActive }) => (
-    <a href="#" className={`nav-link ${isActive ? "active" : ""}`}>
-      {children}
-    </a>
-  );
-
-  const MobileNavLink = ({ children }) => (
-    <a href="#" className="mobile-nav-link">
-      {children}
-    </a>
-  );
+  const handleLogautNavBar = () => {
+    handleLogaut();
+    navigate("/");
+  };
 
   const ActionButton = ({ icon, onClick }) => (
     <button onClick={onClick} className="action-button">
@@ -38,7 +29,7 @@ const LandingNavBar = () => {
           <div className="navbar-row">
             <div className="navbar-brand">
               <img
-                src="/public/icono-perfil.jpg"
+                src="/icono-perfil.jpg"
                 alt="Profile"
                 className="rounded-circle"
                 width="100"
@@ -46,10 +37,18 @@ const LandingNavBar = () => {
               />
               {/* Desktop Navigation */}
               <div className="desktop-nav">
-                <NavLink isActive>Home</NavLink>
-                <NavLink>Marvel</NavLink>
-                <NavLink>DC</NavLink>
-                <NavLink>Favorites</NavLink>
+                <Link to="/home" className="nav-link active">
+                  Home
+                </Link>
+                <Link to="/marvel" className="nav-link">
+                  Marvel
+                </Link>
+                <Link to="/dc" className="nav-link">
+                  DC
+                </Link>
+                <Link to="/favorites" className="nav-link">
+                  Favorites
+                </Link>
               </div>
             </div>
 
@@ -87,7 +86,10 @@ const LandingNavBar = () => {
             <div className="desktop-actions">
               <ActionButton icon={<Globe2 size={20} />} />
               <ActionButton icon={<Palette size={20} />} />
-              <button className="logout-button" onClick={() => navigate("/")}>
+              <button
+                className="logout-button"
+                onClick={() => handleLogautNavBar()}
+              >
                 <LogOut size={20} />
               </button>
             </div>
@@ -117,14 +119,20 @@ const LandingNavBar = () => {
           {isOpen && (
             <div className="mobile-menu">
               <div className="mobile-menu-content">
-                <MobileNavLink>Marvel</MobileNavLink>
-                <MobileNavLink>DC</MobileNavLink>
-                <MobileNavLink>Favorites</MobileNavLink>
+                <Link to="/marvel" className="mobile-nav-link">
+                  Marvel
+                </Link>
+                <Link to="/dc" className="mobile-nav-link">
+                  DC
+                </Link>
+                <Link to="/favorites" className="mobile-nav-link">
+                  Favorites
+                </Link>
                 {/* Mobile Action Button */}
                 <div className="mobile-logout">
                   <button
                     className="mobile-logout-button"
-                    onClick={() => navigate("/")}
+                    onClick={() => handleLogautNavBar()}
                   >
                     <LogOut size={20} />
                     <span>Logout</span>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
+import "./HeroScreen.css";
 import getHeroes from "../../../service/getHeroes";
 
 export const HeroScreen = () => {

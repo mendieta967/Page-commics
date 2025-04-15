@@ -20,7 +20,7 @@ const HomePage = () => {
 
   return (
     <div className="container-home mt-3">
-      <h1 className="text-center">Todos los Superhéroes</h1>
+      <h1 className="text-center">Universo Cómics</h1>
       <hr />
       {loading ? (
         <p className="text-center">Cargando héroes...</p>

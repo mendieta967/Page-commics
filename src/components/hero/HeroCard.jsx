@@ -19,9 +19,14 @@ const HeroCard = ({ id, name, images = {}, biography = {} }) => {
         </p>
       </div>
       <div className="card-footer">
-        <Link to={`/hero/${id}`} className="btn btn-primary btn-sm w-50">
-          Más info...
-        </Link>
+        <div className="footer-link">
+          <Link to={`/hero/${id}`} className="btn btn-primary btn-sm ">
+            Más info...
+          </Link>
+        </div>
+        <div className="footer-button">
+          <button className=" btn-fav">❤️</button>
+        </div>
       </div>
     </div>
   );

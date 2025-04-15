@@ -11,6 +11,7 @@ import NotFound from "../page/notFound/NotFound";
 import Register from "../page/auth/register/Register";
 import Landingpage from "../page/landing/LandingPage";
 import LandingNavBar from "../components/LandingNavBar";
+import FavoritosPage from "../page/heroes/favoritos/FavoritosPage";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,15 @@ const router = createBrowserRouter([
       <ProtectedRouter>
         <NavBar />
         <DcPage />
+      </ProtectedRouter>
+    ),
+  },
+  {
+    path: "/favorites",
+    element: (
+      <ProtectedRouter>
+        <NavBar />
+        <FavoritosPage />
       </ProtectedRouter>
     ),
   },
