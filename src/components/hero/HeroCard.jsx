@@ -5,7 +5,7 @@ const HeroCard = ({ id, name, images = {}, biography = {} }) => {
     images.lg || images.md || images.sm || "/assets/no-image.jpg";
 
   return (
-    <div className="card ">
+    <div className="card">
       <div className="card-img">
         <img src={imagePath} className="card-img-top" alt={name} />
       </div>

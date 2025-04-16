@@ -1,0 +1,144 @@
+/* Contenedor principal */
+.hero-detail-container {
+    display: flex;
+    justify-content: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: #343a40;
+}
+
+/* Tarjeta del héroe */
+.hero-card {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 1250px;
+    width: 100%;
+}
+
+
+b {
+    font-size: 20px;
+}
+
+/* Grid principal */
+.hero-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 30px;
+}
+
+/* Imagen */
+.hero-image-container {
+    text-align: center;
+}
+
+.hero-image {
+    border-radius: 12px;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Info */
+.hero-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.hero-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #f30505;
+    margin-bottom: 10px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.list-group-item {
+    padding: 8px 0;
+    font-size: 1rem;
+    border: none;
+}
+
+/* Botón */
+.btn-regresar {
+    margin-top: 30px;
+    background-color: #f30505;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-regresar:hover {
+    background-color: #c20404;
+}
+
+/* Power Stats */
+.power-stats {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.container-status {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+}
+
+.skill-item-one {
+    width: 40%;
+}
+
+
+.power-stats h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #343a40;
+}
+
+.skill-item {
+    margin-bottom: 20px;
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.progress {
+    border: solid 1px black;
+    height: 10px;
+    background-color: #343a40;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #f30505;
+    transition: width 0.5s ease-in-out;
+    border-radius: 10px 0 0 10px;
+}
+
+.title-powerstats {
+    text-align: center;
+    font-size: 50px;
+}
+
+h5 {
+    font-size: 15px;
+}

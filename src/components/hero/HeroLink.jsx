@@ -25,7 +25,7 @@ const HeroList = ({ publisher, limit = 230 }) => {
   if (loading) return <p>Cargando héroes de {publisher}...</p>;
 
   return (
-    <div className="hero-card-container">
+    <div className="grid-heroes">
       {heroes.map((hero) => (
         <HeroCard key={hero.id} {...hero} />
       ))}

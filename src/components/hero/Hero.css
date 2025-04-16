@@ -78,7 +78,7 @@ p {
 
 
 .btn-fav {
-    background-color: #343a40;
+    background-color: #e8413a;
     color: white;
     border: none;
     border-radius: 50%;
@@ -95,6 +95,6 @@ p {
 }
 
 .btn-fav:hover {
-    background-color: #e8413a;
+    background-color: #343a40;
     transform: scale(1.1);
 }
