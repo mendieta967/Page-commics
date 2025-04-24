@@ -34,6 +34,7 @@ const LandingNavBar = () => {
                 className="rounded-circle"
                 width="100"
                 height="100"
+                onClick={() => navigate("/home")}
               />
               {/* Desktop Navigation */}
               <div className="desktop-nav">

@@ -2,12 +2,10 @@ import HeroList from "../../../components/hero/HeroLink";
 import "./MarvelPage.css";
 const MarvelPage = () => {
   return (
-    <div className="container-marvel">
+    <div className="container-marvel mt-3">
       <h1>MarvelScreen</h1>
       <hr />
-      <div className="contenedor-card mb-4">
-        <HeroList publisher="Marvel Comics" limit={100} />
-      </div>
+      <HeroList publisher="Marvel Comics" limit={100} />
     </div>
   );
 };

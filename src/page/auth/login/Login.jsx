@@ -91,7 +91,7 @@ const Login = () => {
       <div className="conteiner-login">
         <Card.Body>
           <Row>
-            <h5>Bienvenido a Commics</h5>
+            <h2>Bienvenido a Commics</h2>
           </Row>
           <Form onSubmit={onLogin}>
             <FormGroup className="mb-4">
