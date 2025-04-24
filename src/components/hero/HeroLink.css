@@ -23,6 +23,19 @@
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8);
 }
 
+.empty-state-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    text-align: center;
+}
+
+.alert {
+    padding: 1rem 2rem;
+    font-size: 1.25rem;
+}
+
 @media (max-width: 900px) {
     .grid-heroes-marvel {
         grid-template-columns: repeat(3, 1fr);

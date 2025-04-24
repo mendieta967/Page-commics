@@ -38,6 +38,20 @@ h1 {
 
 }
 
+.empty-state-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    text-align: center;
+}
+
+.alert {
+    padding: 1rem 2rem;
+    font-size: 1.25rem;
+}
+
+
 @media (max-width: 900px) {
     .grid-heroes {
         grid-template-columns: repeat(3, 1fr);

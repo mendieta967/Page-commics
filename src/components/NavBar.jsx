@@ -1,6 +1,8 @@
 import { useAuth } from "../context/AuthContext";
+import { useLocation } from "react-router-dom";
+import { useSearch } from "../context/SearchContext";
 import { useNavigate, Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, Search, Globe2, Palette, LogOut, X } from "lucide-react";
 import "./NavBar.css";
 
@@ -9,7 +11,13 @@ const LandingNavBar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const navigate = useNavigate();
+  const { search, setSearch } = useSearch();
+  const location = useLocation();
   const { handleLogaut } = useAuth();
+
+  useEffect(() => {
+    setSearch(""); // Limpiar la barra de búsqueda al cambiar de ruta
+  }, [location.pathname]);
 
   const handleLogautNavBar = () => {
     handleLogaut();
@@ -58,8 +66,11 @@ const LandingNavBar = () => {
               <div className="search-wrapper">
                 <input
                   type="text"
-                  placeholder="Search..."
+                  value={search}
+                  placeholder="Buscar héroes..."
                   className="search-input"
+                  autoFocus
+                  onChange={(e) => setSearch(e.target.value)}
                 />
                 <button className="search-button">
                   <Search size={20} />
@@ -102,8 +113,10 @@ const LandingNavBar = () => {
               <div className="mobile-search-wrapper">
                 <input
                   type="text"
-                  placeholder="Search..."
+                  value={search}
+                  placeholder="Buscar héroes..."
                   className="mobile-search-input"
+                  onChange={(e) => setSearch(e.target.value)}
                   autoFocus
                 />
                 <button
