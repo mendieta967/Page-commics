@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./HeroScreen.css";
 import getHeroes from "../../../service/getHeroes";
 
 export const HeroScreen = () => {
   const { heroeId } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [hero, setHero] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -32,7 +34,7 @@ export const HeroScreen = () => {
     navigate(-1);
   };
 
-  if (loading) return <p>Cargando héroe...</p>;
+  if (loading) return <p>{t("loadingHeroes")}</p>;
   if (!hero) return <Navigate to="/" />;
 
   const { name, biography, images, appearance, powerstats } = hero;
@@ -56,29 +58,29 @@ export const HeroScreen = () => {
               <div>
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">
-                    <b>Nombre completo:</b> {name}
+                    <b>{t("fullName")}:</b> {name}
                   </li>
                   <li className="list-group-item">
-                    <b>Editorial:</b> {biography.publisher}
+                    <b>{t("publisher")}:</b> {biography.publisher}
                   </li>
                   <li className="list-group-item">
-                    <b>Primera aparición:</b> {biography.firstAppearance}
+                    <b>{t("firstAppearance")}:</b> {biography.firstAppearance}
                   </li>
                   <li className="list-group-item">
-                    <b>Lugar de nacimiento:</b> {biography.placeOfBirth}
+                    <b>{"placeOfBirth"}:</b> {biography.placeOfBirth}
                   </li>
                 </ul>
               </div>
               <div>
                 <ul>
                   <li className="list-group-item">
-                    <b>Alineación:</b> {biography.alignment}
+                    <b>{t("alignment")}:</b> {biography.alignment}
                   </li>
                   <li className="list-group-item">
-                    <b>Altura:</b> {appearance.height?.join(" / ")}
+                    <b>{t("height")}:</b> {appearance.height?.join(" / ")}
                   </li>
                   <li className="list-group-item">
-                    <b>Peso:</b> {appearance.weight?.join(" / ")}
+                    <b>{t("weight")}:</b> {appearance.weight?.join(" / ")}
                   </li>
                 </ul>
               </div>
@@ -86,12 +88,12 @@ export const HeroScreen = () => {
           </div>
         </div>
         <div className="power-stats">
-          <h2>Estadísticas de Poder</h2>
+          <h2>{t("powerStats")}</h2>
           <div className="container-status">
             <div className="skill-item-one">
               <div className="skill-item">
                 <div className="skill-header">
-                  <h5>Combate</h5>
+                  <h5>{t("combat")}</h5>
                   <span className="skill-percentage">{powerstats.combat}%</span>
                 </div>
                 <div className="progress">
@@ -103,7 +105,7 @@ export const HeroScreen = () => {
               </div>
               <div className="skill-item">
                 <div className="skill-header">
-                  <h5>Durabilidad</h5>
+                  <h5>{t("durability")}</h5>
                   <span className="skill-percentage">
                     {powerstats.durability}%
                   </span>
@@ -117,7 +119,7 @@ export const HeroScreen = () => {
               </div>
               <div className="skill-item">
                 <div className="skill-header">
-                  <h5>Inteligencia</h5>
+                  <h5>{t("intelligence")}</h5>
                   <span className="skill-percentage">
                     {powerstats.intelligence}%
                   </span>
@@ -133,7 +135,7 @@ export const HeroScreen = () => {
             <div className="skill-item-one ">
               <div className="skill-item">
                 <div className="skill-header">
-                  <h5>Poder</h5>
+                  <h5>{t("power")}</h5>
                   <span className="skill-percentage">{powerstats.power}%</span>
                 </div>
                 <div className="progress">
@@ -145,7 +147,7 @@ export const HeroScreen = () => {
               </div>
               <div className="skill-item">
                 <div className="skill-header">
-                  <h5>Velocidad</h5>
+                  <h5>{t("speed")}</h5>
                   <span className="skill-percentage">{powerstats.speed}%</span>
                 </div>
                 <div className="progress">
@@ -157,7 +159,7 @@ export const HeroScreen = () => {
               </div>
               <div className="skill-item">
                 <div className="skill-header">
-                  <h5>Strength</h5>
+                  <h5>{t("Strength")}</h5>
                   <span className="skill-percentage">
                     {powerstats.strength}%
                   </span>
@@ -174,7 +176,7 @@ export const HeroScreen = () => {
         </div>
         <div>
           <button className="btn-regresar" onClick={handleReturn}>
-            ← Atrás
+            {t("back")}
           </button>
         </div>
       </div>

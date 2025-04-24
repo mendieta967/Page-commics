@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearch } from "../../../context/SearchContext";
 import getHeroes from "../../../service/getHeroes";
 import HeroCard from "../../../components/hero/HeroCard";
+import { useTranslation } from "react-i18next";
 import "./HomePage.css";
 
 const HomePage = () => {
@@ -9,6 +10,7 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
 
   const { search } = useSearch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchHeroes = async () => {
@@ -28,19 +30,17 @@ const HomePage = () => {
   if (filteredHeroes.length === 0) {
     return (
       <div className="empty-state-container">
-        <p className="alert alert-danger text-center">
-          No se encontraron héroes con ese nombre.
-        </p>
+        <p className="alert alert-danger text-center">{t("noHeroesFound")}</p>
       </div>
     );
   }
 
   return (
     <div className="container-home mt-3">
-      <h1 className="text-center">Universo Cómics</h1>
+      <h1 className="text-center">{t("comicsUniverse")}</h1>
       <hr />
       {loading ? (
-        <p className="text-center">Cargando héroes...</p>
+        <p className="text-center">{t("loadingHeroes")}</p>
       ) : (
         <div className="grid-heroes">
           {filteredHeroes.map((hero) => (

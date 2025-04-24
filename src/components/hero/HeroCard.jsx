@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
 import "./Hero.css";
+import { useFavorites } from "../../context/FavoritesContext";
+import { useTranslation } from "react-i18next";
+
 const HeroCard = ({ id, name, images = {}, biography = {} }) => {
   const imagePath =
     images.lg || images.md || images.sm || "/assets/no-image.jpg";
+
+  const { togleFavorite, isFavorite } = useFavorites();
+  const { t } = useTranslation();
+  const alreadyFavorite = isFavorite(id);
+
+  const hero = { id, name, images, biography };
 
   return (
     <div className="card">
@@ -12,20 +21,33 @@ const HeroCard = ({ id, name, images = {}, biography = {} }) => {
       <div className="card-body">
         <h5 className="card-title">{name}</h5>
         <p>
-          <strong>Nombre real:</strong> {biography.fullName}
+          <strong>{t("fullName")}:</strong> {biography.fullName}
         </p>
         <p>
-          <strong>Primera aparición:</strong> {biography.firstAppearance}
+          <strong>{t("publisher")}:</strong> {biography.firstAppearance}
         </p>
       </div>
       <div className="card-footer">
         <div className="footer-link">
           <Link to={`/hero/${id}`} className="btn btn-primary btn-sm ">
-            Más info...
+            {t("moreInfo")}
           </Link>
         </div>
         <div className="footer-button">
-          <button className=" btn-fav">❤️</button>
+          <button
+            onClick={() => togleFavorite(hero)}
+            className={`btn-fav ${
+              alreadyFavorite ? "is-favorite" : "not-favorite"
+            }`}
+            aria-label={
+              alreadyFavorite ? t("removeFromFavorites") : t("addToFavorites")
+            }
+            title={
+              alreadyFavorite ? t("removeFromFavorites") : t("addToFavorites")
+            }
+          >
+            {alreadyFavorite ? "🗑️" : "❤️"}
+          </button>
         </div>
       </div>
     </div>

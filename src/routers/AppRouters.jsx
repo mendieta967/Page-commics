@@ -3,7 +3,6 @@ import Login from "../page/auth/login/Login";
 import HomePage from "../page/heroes/homepage/HomePage";
 import DcPage from "../page/heroes/dcPage/DcPage";
 import MarvelPage from "../page/heroes/marvelPage/MarvelPage";
-import SearchPage from "../page/heroes/searchPage/SearchPage";
 import { HeroScreen } from "../page/heroes/heroScreem/HeroScreen";
 import NavBar from "../components/NavBar";
 import ProtectedRouter from "../utils/ProtectedRouter";
@@ -49,10 +48,6 @@ const router = createBrowserRouter([
         <MarvelPage />
       </ProtectedRouter>
     ),
-  },
-  {
-    path: "/search",
-    element: <SearchPage />,
   },
   {
     path: "/hero/:heroeId", // Nueva ruta para detalles de héroes

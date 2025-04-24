@@ -1,6 +1,8 @@
 import { useAuth } from "../context/AuthContext";
 import { useLocation } from "react-router-dom";
 import { useSearch } from "../context/SearchContext";
+import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 import { useNavigate, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Menu, Search, Globe2, Palette, LogOut, X } from "lucide-react";
@@ -9,11 +11,13 @@ import "./NavBar.css";
 const LandingNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const navigate = useNavigate();
   const { search, setSearch } = useSearch();
   const location = useLocation();
   const { handleLogaut } = useAuth();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setSearch(""); // Limpiar la barra de búsqueda al cambiar de ruta
@@ -29,6 +33,14 @@ const LandingNavBar = () => {
       {icon}
     </button>
   );
+
+  const [open, setOpen] = useState(false);
+  const toggleMenu = () => setOpen(!open);
+
+  const handleLenguageChange = (language) => {
+    i18n.changeLanguage(language);
+    setOpen(false);
+  };
 
   return (
     <div className="container-navbar">
@@ -46,7 +58,7 @@ const LandingNavBar = () => {
               />
               {/* Desktop Navigation */}
               <div className="desktop-nav">
-                <Link to="/home" className="nav-link active">
+                <Link to="/home" className="nav-link">
                   Home
                 </Link>
                 <Link to="/marvel" className="nav-link">
@@ -56,7 +68,7 @@ const LandingNavBar = () => {
                   DC
                 </Link>
                 <Link to="/favorites" className="nav-link">
-                  Favorites
+                  {t("favorites")}
                 </Link>
               </div>
             </div>
@@ -67,20 +79,36 @@ const LandingNavBar = () => {
                 <input
                   type="text"
                   value={search}
-                  placeholder="Buscar héroes..."
+                  placeholder={t("search")}
                   className="search-input"
-                  autoFocus
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
                   onChange={(e) => setSearch(e.target.value)}
                 />
-                <button className="search-button">
-                  <Search size={20} />
-                </button>
+                {!isFocused && (
+                  <button className="search-button">
+                    <Search size={20} />
+                  </button>
+                )}
               </div>
             </div>
 
             {/* Mobile Action Buttons */}
             <div className="mobile-actions">
-              <ActionButton icon={<Globe2 size={20} />} />
+              <ActionButton icon={<Globe2 size={22} />} onClick={toggleMenu} />
+              {open && (
+                <div className="language-menu">
+                  <button onClick={() => handleLenguageChange("es")}>
+                    <span>🇪🇸</span>
+                  </button>
+                  <button onClick={() => handleLenguageChange("en")}>
+                    <span>🇺🇸</span>
+                  </button>
+                  <button onClick={() => handleLenguageChange("pt")}>
+                    <span>🇧🇷</span>
+                  </button>
+                </div>
+              )}
               <ActionButton icon={<Palette size={20} />} />
               <ActionButton
                 icon={<Search size={20} />}
@@ -96,13 +124,23 @@ const LandingNavBar = () => {
 
             {/* Desktop Action Buttons */}
             <div className="desktop-actions">
-              <ActionButton icon={<Globe2 size={20} />} />
-              <ActionButton icon={<Palette size={20} />} />
-              <button
-                className="logout-button"
-                onClick={() => handleLogautNavBar()}
-              >
-                <LogOut size={20} />
+              <ActionButton icon={<Globe2 size={22} />} onClick={toggleMenu} />
+              {open && (
+                <div className="language-menu">
+                  <button onClick={() => handleLenguageChange("es")}>
+                    <span>🇪🇸</span>
+                  </button>
+                  <button onClick={() => handleLenguageChange("en")}>
+                    <span>🇺🇸</span>
+                  </button>
+                  <button onClick={() => handleLenguageChange("pt")}>
+                    <span>🇧🇷</span>
+                  </button>
+                </div>
+              )}
+              <ActionButton icon={<Palette size={22} />} />
+              <button className="logout-button" onClick={handleLogaut}>
+                <LogOut size={22} />
               </button>
             </div>
           </div>
@@ -140,7 +178,7 @@ const LandingNavBar = () => {
                   DC
                 </Link>
                 <Link to="/favorites" className="mobile-nav-link">
-                  Favorites
+                  Favoritos
                 </Link>
                 {/* Mobile Action Button */}
                 <div className="mobile-logout">
