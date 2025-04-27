@@ -1,3 +1,7 @@
+:root {
+    --theme-color: #f30505;
+}
+
 .container-home {
     padding: 2rem;
     max-width: 100%;
@@ -33,7 +37,11 @@ h1 {
     font-size: 2.5rem;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    color: #f30505;
+    color: var(--theme-color);
+}
+
+h1:hover {
+    transform: scale(1.05);
 }
 
 .empty-state-container {

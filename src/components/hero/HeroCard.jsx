@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import "./Hero.css";
 import { useFavorites } from "../../context/FavoritesContext";
 import { useTranslation } from "react-i18next";
+import { ThemeContext } from "../../context/ThemeContext";
+import { useContext } from "react";
 
 const HeroCard = ({ id, name, images = {}, biography = {} }) => {
   const imagePath =
@@ -10,6 +12,7 @@ const HeroCard = ({ id, name, images = {}, biography = {} }) => {
   const { togleFavorite, isFavorite } = useFavorites();
   const { t } = useTranslation();
   const alreadyFavorite = isFavorite(id);
+  const { themeColor } = useContext(ThemeContext);
 
   const hero = { id, name, images, biography };
 
@@ -19,22 +22,31 @@ const HeroCard = ({ id, name, images = {}, biography = {} }) => {
         <img src={imagePath} className="card-img-top" alt={name} />
       </div>
       <div className="card-body">
-        <h5 className="card-title">{name}</h5>
+        <h5 className="card-title" style={{ color: themeColor }}>
+          {name}
+        </h5>
         <p>
-          <strong>{t("fullName")}:</strong> {biography.fullName}
+          <strong style={{ color: themeColor }}>{t("fullName")}:</strong>{" "}
+          {biography.fullName}
         </p>
         <p>
-          <strong>{t("publisher")}:</strong> {biography.firstAppearance}
+          <strong style={{ color: themeColor }}>{t("publisher")}:</strong>{" "}
+          {biography.firstAppearance}
         </p>
       </div>
       <div className="card-footer">
         <div className="footer-link">
-          <Link to={`/hero/${id}`} className="btn btn-primary btn-sm ">
+          <Link
+            to={`/hero/${id}`}
+            className="btn btn-primary btn-sm "
+            style={{ backgroundColor: themeColor, color: "black" }}
+          >
             {t("moreInfo")}
           </Link>
         </div>
         <div className="footer-button">
           <button
+            style={{ backgroundColor: themeColor }}
             onClick={() => togleFavorite(hero)}
             className={`btn-fav ${
               alreadyFavorite ? "is-favorite" : "not-favorite"

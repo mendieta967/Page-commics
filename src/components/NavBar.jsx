@@ -1,52 +1,97 @@
+"use client";
+
 import { useAuth } from "../context/AuthContext";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useSearch } from "../context/SearchContext";
 import { useTranslation } from "react-i18next";
+import { ThemeContext } from "../context/ThemeContext";
+import { useContext, useState, useEffect } from "react";
 import i18n from "i18next";
-import { useNavigate, Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
 import { Menu, Search, Globe2, Palette, LogOut, X } from "lucide-react";
 import "./NavBar.css";
 
 const LandingNavBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [openLanguageMenu, setOpenLanguageMenu] = useState(false);
+  const [openPaletteMenu, setOpenPaletteMenu] = useState(false);
+  const [isPaletaColors, setIsPaletaColors] = useState(false);
 
-  const navigate = useNavigate();
   const { search, setSearch } = useSearch();
-  const location = useLocation();
   const { handleLogaut } = useAuth();
   const { t } = useTranslation();
+  const { themeColor, changeTheme } = useContext(ThemeContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    setSearch(""); // Limpiar la barra de búsqueda al cambiar de ruta
+    setSearch(""); // limpiar búsqueda al cambiar ruta
   }, [location.pathname]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        !event.target.closest(".language-menu") &&
+        !event.target.closest(".language-button")
+      ) {
+        setOpenLanguageMenu(false);
+      }
+      if (
+        !event.target.closest(".palette-menu") &&
+        !event.target.closest(".palette-button")
+      ) {
+        setOpenPaletteMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleLogautNavBar = () => {
     handleLogaut();
     navigate("/");
   };
 
-  const ActionButton = ({ icon, onClick }) => (
-    <button onClick={onClick} className="action-button">
+  const toggleLanguageMenu = () => setOpenLanguageMenu((prev) => !prev);
+  const togglePaletteMenu = () => setOpenPaletteMenu((prev) => !prev);
+  const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
+
+  const handleLanguageChange = (language) => {
+    i18n.changeLanguage(language);
+    setOpenLanguageMenu(false);
+  };
+
+  const handlePaletaColors = (color) => {
+    changeTheme(color); // Cambiar el tema con el color seleccionado
+    setOpenPaletteMenu(false); // Cerrar el menú de colores después de seleccionar un color
+  };
+
+  const ActionButton = ({ icon, onClick, className = "" }) => (
+    <button onClick={onClick} className={`action-button ${className}`}>
       {icon}
     </button>
   );
 
-  const [open, setOpen] = useState(false);
-  const toggleMenu = () => setOpen(!open);
-
-  const handleLenguageChange = (language) => {
-    i18n.changeLanguage(language);
-    setOpen(false);
-  };
+  // Apply theme color to CSS variables
+  useEffect(() => {
+    document.documentElement.style.setProperty("--theme-color", themeColor);
+  }, [themeColor]);
 
   return (
-    <div className="container-navbar">
+    <div
+      className="container-navbar"
+      style={{
+        borderColor: themeColor,
+        boxShadow: `0 2px 8px ${themeColor}40`,
+      }}
+    >
       <nav className="navbar px-4 py-2">
         <div className="navbar-container">
           <div className="navbar-row">
+            {/* Logo */}
             <div className="navbar-brand">
               <img
                 src="/icono-perfil.jpg"
@@ -56,7 +101,7 @@ const LandingNavBar = () => {
                 height="100"
                 onClick={() => navigate("/home")}
               />
-              {/* Desktop Navigation */}
+              {/* Desktop Links */}
               <div className="desktop-nav">
                 <Link to="/home" className="nav-link">
                   Home
@@ -73,7 +118,7 @@ const LandingNavBar = () => {
               </div>
             </div>
 
-            {/* Search Bar - Hidden on mobile */}
+            {/* Search */}
             <div className="search-container">
               <div className="search-wrapper">
                 <input
@@ -93,59 +138,161 @@ const LandingNavBar = () => {
               </div>
             </div>
 
-            {/* Mobile Action Buttons */}
+            {/* Mobile Actions */}
             <div className="mobile-actions">
-              <ActionButton icon={<Globe2 size={22} />} onClick={toggleMenu} />
-              {open && (
+              <ActionButton
+                icon={<Globe2 size={22} />}
+                onClick={toggleLanguageMenu}
+                className="language-button"
+              />
+              {openLanguageMenu && (
                 <div className="language-menu">
-                  <button onClick={() => handleLenguageChange("es")}>
+                  <button onClick={() => handleLanguageChange("es")}>
                     <span>🇪🇸</span>
                   </button>
-                  <button onClick={() => handleLenguageChange("en")}>
+                  <button onClick={() => handleLanguageChange("en")}>
                     <span>🇺🇸</span>
                   </button>
-                  <button onClick={() => handleLenguageChange("pt")}>
+                  <button onClick={() => handleLanguageChange("pt")}>
                     <span>🇧🇷</span>
                   </button>
                 </div>
               )}
-              <ActionButton icon={<Palette size={20} />} />
+              <ActionButton
+                icon={<Palette size={20} />}
+                onClick={togglePaletteMenu}
+                className="palette-button"
+              />
+              {openPaletteMenu && (
+                <div className="palette-menu">
+                  <button
+                    className="palette-color"
+                    style={{
+                      backgroundColor: "#f44336",
+                      border:
+                        themeColor === "#f44336" ? "2px solid white" : "none",
+                    }}
+                    onClick={() => handlePaletaColors("#f44336")}
+                  ></button>
+                  <button
+                    className="palette-color"
+                    style={{
+                      backgroundColor: "#2196f3",
+                      border:
+                        themeColor === "#2196f3" ? "2px solid white" : "none",
+                    }}
+                    onClick={() => handlePaletaColors("#2196f3")}
+                  ></button>
+                  <button
+                    className="palette-color"
+                    style={{
+                      backgroundColor: "#4caf50",
+                      border:
+                        themeColor === "#4caf50" ? "2px solid white" : "none",
+                    }}
+                    onClick={() => handlePaletaColors("#4caf50")}
+                  ></button>
+                  <button
+                    className="palette-color"
+                    style={{
+                      backgroundColor: "#ffeb3b",
+                      border:
+                        themeColor === "#ffeb3b" ? "2px solid white" : "none",
+                    }}
+                    onClick={() => handlePaletaColors("#ffeb3b")}
+                  ></button>
+                </div>
+              )}
               <ActionButton
                 icon={<Search size={20} />}
-                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                onClick={() => setIsSearchOpen((prev) => !prev)}
               />
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="menu-button"
-              >
+              <button onClick={toggleMobileMenu} className="menu-button">
                 <Menu size={24} />
               </button>
             </div>
 
-            {/* Desktop Action Buttons */}
+            {/* Desktop Actions */}
             <div className="desktop-actions">
-              <ActionButton icon={<Globe2 size={22} />} onClick={toggleMenu} />
-              {open && (
+              <ActionButton
+                icon={<Globe2 size={22} />}
+                onClick={toggleLanguageMenu}
+                className="language-button"
+              />
+              {openLanguageMenu && (
                 <div className="language-menu">
-                  <button onClick={() => handleLenguageChange("es")}>
+                  <button onClick={() => handleLanguageChange("es")}>
                     <span>🇪🇸</span>
                   </button>
-                  <button onClick={() => handleLenguageChange("en")}>
+                  <button onClick={() => handleLanguageChange("en")}>
                     <span>🇺🇸</span>
                   </button>
-                  <button onClick={() => handleLenguageChange("pt")}>
+                  <button onClick={() => handleLanguageChange("pt")}>
                     <span>🇧🇷</span>
                   </button>
                 </div>
               )}
-              <ActionButton icon={<Palette size={22} />} />
+              <ActionButton
+                icon={<Palette size={22} />}
+                onClick={togglePaletteMenu}
+                className="palette-button"
+              />
+              {openPaletteMenu && (
+                <div className="palette-menu">
+                  <button
+                    className="palette-color"
+                    style={{
+                      backgroundColor: "#f44336",
+                      border:
+                        themeColor === "#f44336" ? "2px solid white" : "none",
+                    }}
+                    onClick={() => {
+                      handlePaletaColors("#f44336"); // Cerrar el menú después de seleccionar el color
+                    }}
+                  ></button>
+                  <button
+                    className="palette-color"
+                    style={{
+                      backgroundColor: "#2196f3",
+                      border:
+                        themeColor === "#2196f3" ? "2px solid white" : "none",
+                    }}
+                    onClick={() => {
+                      handlePaletaColors("#2196f3");
+                    }}
+                  ></button>
+                  <button
+                    className="palette-color"
+                    style={{
+                      backgroundColor: "#4caf50",
+                      border:
+                        themeColor === "#4caf50" ? "2px solid white" : "none",
+                    }}
+                    onClick={() => {
+                      handlePaletaColors("#4caf50");
+                    }}
+                  ></button>
+                  <button
+                    className="palette-color"
+                    style={{
+                      backgroundColor: "#ffeb3b",
+                      border:
+                        themeColor === "#ffeb3b" ? "2px solid white" : "none",
+                    }}
+                    onClick={() => {
+                      handlePaletaColors("#ffeb3b");
+                    }}
+                  ></button>
+                </div>
+              )}
+
               <button className="logout-button" onClick={handleLogaut}>
                 <LogOut size={22} />
               </button>
             </div>
           </div>
 
-          {/* Mobile Search Bar - Expandable */}
+          {/* Mobile Expanded Search */}
           {isSearchOpen && (
             <div className="mobile-search">
               <div className="mobile-search-wrapper">
@@ -167,8 +314,8 @@ const LandingNavBar = () => {
             </div>
           )}
 
-          {/* Mobile menu */}
-          {isOpen && (
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
             <div className="mobile-menu">
               <div className="mobile-menu-content">
                 <Link to="/marvel" className="mobile-nav-link">
@@ -178,13 +325,12 @@ const LandingNavBar = () => {
                   DC
                 </Link>
                 <Link to="/favorites" className="mobile-nav-link">
-                  Favoritos
+                  {t("favorites")}
                 </Link>
-                {/* Mobile Action Button */}
                 <div className="mobile-logout">
                   <button
                     className="mobile-logout-button"
-                    onClick={() => handleLogautNavBar()}
+                    onClick={handleLogautNavBar}
                   >
                     <LogOut size={20} />
                     <span>Logout</span>

@@ -3,6 +3,8 @@ import { useSearch } from "../../../context/SearchContext";
 import getHeroes from "../../../service/getHeroes";
 import HeroCard from "../../../components/hero/HeroCard";
 import { useTranslation } from "react-i18next";
+import { ThemeContext } from "../../../context/ThemeContext";
+import { useContext } from "react";
 import "./HomePage.css";
 
 const HomePage = () => {
@@ -11,6 +13,7 @@ const HomePage = () => {
 
   const { search } = useSearch();
   const { t } = useTranslation();
+  const { themeColor } = useContext(ThemeContext); // Aquí accedes al color del tema
 
   useEffect(() => {
     const fetchHeroes = async () => {
@@ -37,10 +40,24 @@ const HomePage = () => {
 
   return (
     <div className="container-home mt-3">
-      <h1 className="text-center">{t("comicsUniverse")}</h1>
+      <h1
+        className="text-center"
+        style={{
+          color: themeColor,
+        }}
+      >
+        {t("comicsUniverse")}
+      </h1>
       <hr />
       {loading ? (
-        <p className="text-center">{t("loadingHeroes")}</p>
+        <p
+          className="text-center"
+          style={{
+            Color: themeColor,
+          }}
+        >
+          {t("loadingHeroes")}
+        </p>
       ) : (
         <div className="grid-heroes">
           {filteredHeroes.map((hero) => (

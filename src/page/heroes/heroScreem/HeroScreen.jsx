@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ThemeContext } from "../../../context/ThemeContext";
+import { useContext } from "react";
 import "./HeroScreen.css";
 import getHeroes from "../../../service/getHeroes";
 
@@ -8,6 +10,7 @@ export const HeroScreen = () => {
   const { heroeId } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { themeColor } = useContext(ThemeContext);
 
   const [hero, setHero] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -52,35 +55,43 @@ export const HeroScreen = () => {
           </div>
 
           <div className="hero-info">
-            <h1 className="hero-title">{name}</h1>
+            <h1 className="hero-title" style={{ color: themeColor }}>
+              {name}
+            </h1>
             <hr />
             <div className="info-grid">
               <div>
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">
-                    <b>{t("fullName")}:</b> {name}
+                    <b style={{ color: themeColor }}>{t("fullName")}:</b> {name}
                   </li>
                   <li className="list-group-item">
-                    <b>{t("publisher")}:</b> {biography.publisher}
+                    <b style={{ color: themeColor }}>{t("publisher")}:</b>{" "}
+                    {biography.publisher}
                   </li>
                   <li className="list-group-item">
-                    <b>{t("firstAppearance")}:</b> {biography.firstAppearance}
+                    <b style={{ color: themeColor }}>{t("firstAppearance")}:</b>{" "}
+                    {biography.firstAppearance}
                   </li>
                   <li className="list-group-item">
-                    <b>{"placeOfBirth"}:</b> {biography.placeOfBirth}
+                    <b style={{ color: themeColor }}>{"placeOfBirth"}:</b>{" "}
+                    {biography.placeOfBirth}
                   </li>
                 </ul>
               </div>
               <div>
                 <ul>
                   <li className="list-group-item">
-                    <b>{t("alignment")}:</b> {biography.alignment}
+                    <b style={{ color: themeColor }}>{t("alignment")}:</b>{" "}
+                    {biography.alignment}
                   </li>
                   <li className="list-group-item">
-                    <b>{t("height")}:</b> {appearance.height?.join(" / ")}
+                    <b style={{ color: themeColor }}>{t("height")}:</b>{" "}
+                    {appearance.height?.join(" / ")}
                   </li>
                   <li className="list-group-item">
-                    <b>{t("weight")}:</b> {appearance.weight?.join(" / ")}
+                    <b style={{ color: themeColor }}>{t("weight")}:</b>{" "}
+                    {appearance.weight?.join(" / ")}
                   </li>
                 </ul>
               </div>
@@ -88,7 +99,7 @@ export const HeroScreen = () => {
           </div>
         </div>
         <div className="power-stats">
-          <h2>{t("powerStats")}</h2>
+          <h2 style={{ color: themeColor }}>{t("powerStats")}</h2>
           <div className="container-status">
             <div className="skill-item-one">
               <div className="skill-item">
@@ -99,7 +110,10 @@ export const HeroScreen = () => {
                 <div className="progress">
                   <div
                     className="progress-bar"
-                    style={{ width: `${powerstats.combat}%` }}
+                    style={{
+                      width: `${powerstats.combat}%`,
+                      backgroundColor: themeColor,
+                    }}
                   ></div>
                 </div>
               </div>
@@ -113,7 +127,10 @@ export const HeroScreen = () => {
                 <div className="progress">
                   <div
                     className="progress-bar"
-                    style={{ width: `${powerstats.durability}%` }}
+                    style={{
+                      width: `${powerstats.durability}%`,
+                      backgroundColor: themeColor,
+                    }}
                   ></div>
                 </div>
               </div>
@@ -127,7 +144,10 @@ export const HeroScreen = () => {
                 <div className="progress">
                   <div
                     className="progress-bar"
-                    style={{ width: `${powerstats.intelligence}%` }}
+                    style={{
+                      width: `${powerstats.intelligence}%`,
+                      backgroundColor: themeColor,
+                    }}
                   ></div>
                 </div>
               </div>
@@ -141,7 +161,10 @@ export const HeroScreen = () => {
                 <div className="progress">
                   <div
                     className="progress-bar"
-                    style={{ width: `${powerstats.power}%` }}
+                    style={{
+                      width: `${powerstats.power}%`,
+                      backgroundColor: themeColor,
+                    }}
                   ></div>
                 </div>
               </div>
@@ -153,7 +176,10 @@ export const HeroScreen = () => {
                 <div className="progress">
                   <div
                     className="progress-bar"
-                    style={{ width: `${powerstats.speed}%` }}
+                    style={{
+                      width: `${powerstats.speed}%`,
+                      backgroundColor: themeColor,
+                    }}
                   ></div>
                 </div>
               </div>
@@ -167,7 +193,10 @@ export const HeroScreen = () => {
                 <div className="progress">
                   <div
                     className="progress-bar"
-                    style={{ width: `${powerstats.strength}%` }}
+                    style={{
+                      width: `${powerstats.strength}%`,
+                      backgroundColor: themeColor,
+                    }}
                   ></div>
                 </div>
               </div>
@@ -175,7 +204,11 @@ export const HeroScreen = () => {
           </div>
         </div>
         <div>
-          <button className="btn-regresar" onClick={handleReturn}>
+          <button
+            className="btn-regresar"
+            onClick={handleReturn}
+            style={{ backgroundColor: themeColor, color: "black" }}
+          >
             {t("back")}
           </button>
         </div>
